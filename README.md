@@ -36,10 +36,12 @@ pip install s3cmd
 
 `capistrano/s3-shared-secrets` comes with 4 tasks
 
-* `cap secrets:compare                # Compares local secrets with the stored on the bucket`
-* `cap secrets:get_from_s3            # Overwrites local secrets with bucket version`
-* `cap secrets:upload                 # Uploads secrets.yml`
-* `cap app:write:secrets_yml          # write secrets.yml`
+```
+cap secrets:compare                # Compares local secrets with the stored on the bucket
+cap secrets:get_from_s3            # Overwrites local secrets with bucket version
+cap secrets:upload                 # Uploads secrets.yml
+cap app:write:secrets_yml          # write secrets.yml
+```
 
 If theres a `deploy_<stage>:` section in the secrets file it will be available thru fetch to capistrano via fetch in a `:secrets` array
 
