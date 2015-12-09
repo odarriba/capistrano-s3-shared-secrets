@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Carlos Peñas"]
   spec.email         = ["carlos.penas@the-cocktail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{S3 backed secrets.yml sharing}
+  spec.description   = %q{share secrets.yml across developers thru S3 bucket and made some secrets available on capistrano}
+  spec.homepage      = "https://github.com/the-cocktail/capistrano-s3-shared-secrets"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
