@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'capistrano/s3/shared/secrets/version'
+require 'capistrano/s3-shared-secrets/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-s3-shared-secrets"
-  spec.version       = Capistrano::S3::Shared::Secrets::VERSION
+  spec.version       = Capistrano::S3SharedSecrets::VERSION
   spec.authors       = ["Carlos Peñas"]
   spec.email         = ["carlos.penas@the-cocktail.com"]
 
