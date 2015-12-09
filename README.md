@@ -45,19 +45,19 @@ cap app:write:secrets_yml          # write secrets.yml
 
 If theres a `deploy_<stage>:` section in the secrets file it will be available thru fetch to capistrano via fetch in a `:secrets` array
 
-### secrets:get_from_s3
+#### secrets:get_from_s3
 
 Gets local secrets file from the AWS bucket (`s3cmd` must be properly configured to access bucket contents) *overwriting* local file
 
-### secrets:upload
+#### secrets:upload
 
 Uploads local secrets file from local *overwriting* the AWS S3 bucket destination
 
-### secrets:compare
+#### secrets:compare
 
 Shows a diff between local and S3 stored secrets file
 
-### app:write:secrets_yml
+#### app:write:secrets_yml
 
 Overwrite secrets file in the release roles using local file contents, it only writes the section which match the `:stage` selected in capistrano
 
