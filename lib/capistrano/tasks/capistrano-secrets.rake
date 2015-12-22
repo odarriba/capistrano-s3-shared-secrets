@@ -12,9 +12,9 @@ namespace :app do
     desc "write secrets.yml"
     task :secrets_yml do
       on roles(fetch(:secret_roles)) do
-        yaml = YAML::load_file(File.expand_path(fetch(:secret_local_file)))
+        yaml = YAML::load_file(File.expand_path(fetch(:secrets_local_file)))
         subset = yaml[fetch(:rails_env).to_s]
-        upload! StringIO.new({fetch(:rails_env).to_s => subset}.to_yaml), "#{shared_path}/#{fetch(:secret_local_file)}"
+        upload! StringIO.new({fetch(:rails_env).to_s => subset}.to_yaml), "#{shared_path}/#{fetch(:secrets_local_file)}"
       end
     end
   end
