@@ -9,7 +9,7 @@ end
 
 namespace :app do
   namespace :write do
-    desc "write secrets.yml"
+    desc "write apropiate section of local secrets.yml to the servers filesystem"
     task :secrets_yml do
       yaml = YAML::load_file(File.expand_path(fetch(:secrets_local_file)))
       subset = yaml[fetch(:rails_env).to_s]
@@ -35,7 +35,7 @@ namespace :secrets do
     end
   end
 
-  desc "Uploads secrets.yml"
+  desc "Uploads local secrets.yml to shared bucket"
   task :upload do
     on :local do
       if File.exist?(File.expand_path(fetch(:secrets_local_file)))
@@ -46,7 +46,7 @@ namespace :secrets do
     end
   end
 
-  desc "Compares local secrets with the stored on the bucket"
+  desc "Compares local secrets with the stored on the shared bucket"
   task :compare do
     on :local do 
       if test :s3cmd, "--force get s3://#{fetch(:setup_bucket)}/deploy/secrets.yml /tmp/secrets.yml"
@@ -58,7 +58,7 @@ namespace :secrets do
     end
   end
 
-  desc "Overwrites local secrets with bucket version"
+  desc "Overwrites local secrets with shared bucket version"
   task :get_from_s3 do
     on :local do
       unless test :s3cmd, "--force get s3://#{fetch(:setup_bucket)}/deploy/secrets.yml #{fetch(:secrets_local_file)}"
