@@ -53,5 +53,3 @@ namespace :secrets do
     end
   end
 end
-
-after 'load:defaults', 'secrets:load'
