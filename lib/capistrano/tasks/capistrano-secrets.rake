@@ -25,7 +25,7 @@ namespace :secrets do
   task :upload do
     on :local do
       if File.exist?(File.expand_path(fetch(:secrets_local_file)))
-        execute :s3cmd, "put #{fetch(:secrets_local_file)} s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)}" 
+        execute :aws, "s3 cp #{fetch(:secrets_local_file)} s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)}" 
       else
         puts "WARNING secrets file #{fetch(:secrets_local_file)} not found! nothing uploaded".yellow if fetch(:warn_if_no_secrets_file)
       end
@@ -35,7 +35,7 @@ namespace :secrets do
   desc "Compares local secrets with the stored on the shared bucket"
   task :compare do
     on :local do 
-      if test :s3cmd, "--force get s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)} /tmp/secrets.yml"
+      if test :aws, " s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)} /tmp/secrets.yml"
         puts capture :diff, "-u /tmp/secrets.yml #{fetch(:secrets_local_file)}; true"
         execute :rm, "/tmp/secrets.yml"
       else
@@ -47,7 +47,7 @@ namespace :secrets do
   desc "Overwrites local secrets with shared bucket version"
   task :get_from_s3 do
     on :local do
-      unless test :s3cmd, "--force get s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)} #{fetch(:secrets_local_file)}"
+      unless test :aws, "s3 cp s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)} #{fetch(:secrets_local_file)}"
         puts "Error downloading (Maybe there's no shared secrets file at s3://#{fetch(:setup_bucket)}/#{fetch(:secrets_remote_file)} )".red
       end
     end
