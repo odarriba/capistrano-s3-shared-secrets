@@ -8,19 +8,15 @@ namespace :load do
   end
 end
 
-namespace :app do
-  namespace :write do
-    desc "write apropiate section of local secrets file to the servers filesystem"
-    task :secrets_yml do
-      config_file = File.read(File.expand_path(fetch(:secrets_local_file)))
-      on roles(fetch(:secret_roles)) do
-        upload! StringIO.new(config_file), "#{shared_path}/#{fetch(:secrets_local_file)}"
-      end
+namespace :secrets do
+  desc "write apropiate section of local secrets file to the servers filesystem"
+  task :deploy do
+    config_file = File.read(File.expand_path(fetch(:secrets_local_file)))
+    on roles(fetch(:secret_roles)) do
+      upload! StringIO.new(config_file), "#{shared_path}/#{fetch(:secrets_local_file)}"
     end
   end
-end
 
-namespace :secrets do
   desc "Uploads local secrets.yml to shared bucket"
   task :upload do
     on :local do
