@@ -2,9 +2,9 @@ namespace :load do
   task :defaults do
     set :secrets_local_file, 'config/secrets.yml'
     set :secrets_remote_file, 'config/secrets.yml'
-    set :setup_bucket, -> {""}
-    set :warn_if_no_secrets_file, -> { true }
-    set :secret_roles, -> { %w() }
+    set :setup_bucket, ''
+    set :warn_if_no_secrets_file, true
+    set :secret_roles, []
   end
 end
 
